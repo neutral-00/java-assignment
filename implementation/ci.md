@@ -87,7 +87,7 @@ git add .
 git commit -m "feat: add unit tests and CI pipeline with coverage"
 
 # 4. Link to your GitHub repo
-git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
+git remote add origin https://github.com/NEUTRAL/YOUR_REPO_NAME.git
 
 # 5. Push to main
 git branch -M main
