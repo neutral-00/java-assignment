@@ -1,3 +1,5 @@
+
+
 The error "Plugin not found" for **3.2.5** is frustrating because that version definitively exists in Maven Central. This persistence usually points to a **cached failure**—essentially, Maven failed to download it once (perhaps during the version flip) and has now created a `.lastUpdated` file that prevents it from trying again.
 
 Since you are now on **Quarkus 3.15 LTS**, the most stable approach is to align with the modern Maven plugin stream (**3.5.x**) used by recent Quarkus releases to avoid these legacy resolution bugs.

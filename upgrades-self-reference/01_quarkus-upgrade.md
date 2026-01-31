@@ -1,3 +1,5 @@
+There was communication issue between quarkus test container and docker. 
+Looks like quarkus was a bit outdated as per my local docker - 29.2.0 
 
 ```bash
 ❯ quarkus update --stream=3.15
@@ -59,7 +61,7 @@ y
 [INFO] ------------------------------------------------------------------------
 ```
 
-I had to upgrade even further
+I had to upgrade further to 3.27
 
 ```bash
 quarkus update --stream=3.27
