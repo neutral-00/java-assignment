@@ -1,0 +1,49 @@
+name: Java CI with Maven
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      # Although Quarkus Dev Services can start Postgres,
+      # having Docker available on the runner is sufficient.
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: quarkus_test
+          POSTGRES_PASSWORD: quarkus_test
+          POSTGRES_DB: quarkus_test
+        ports:
+          - 15432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Build and Test with Maven
+        # This runs all your @QuarkusTests, including the ones we wrote
+        run: mvn -B clean verify
+
+      - name: Upload JaCoCo Coverage Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jacoco-report
+          path: target/site/jacoco/
